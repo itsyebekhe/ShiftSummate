@@ -1,0 +1,42 @@
+{
+    "name": "ShiftSummate",
+    "short_name": "ShiftSummate",
+    "description": "ShiftSummate is an innovative application designed to streamline the management of work shifts and salary calculations.",
+    "icons": [
+      {
+        "src": "ic_launcher/android/mipmap-ldpi/ic_launcher.png",
+        "sizes": "32x32",
+        "type": "image/jpeg"
+      },
+      {
+        "src": "ic_launcher/android/mipmap-hdpi/ic_launcher.png",
+        "sizes": "72x72",
+        "type": "image/jpeg"
+      },
+      {
+        "src": "ic_launcher/android/mipmap-xhdpi/ic_launcher.png",
+        "sizes": "96x96",
+        "type": "image/jpeg"
+      },
+      {
+        "src": "ic_launcher/android/mipmap-xxhdpi/ic_launcher.png",
+        "sizes": "144x144",
+        "type": "image/jpeg"
+      },
+      {
+        "src": "ic_launcher/android/mipmap-xxxhdpi/ic_launcher.png",
+        "sizes": "192x192",
+        "type": "image/jpeg"
+      },
+      {
+        "src": "ic_launcher/android/ic_launcher-web.png",
+        "sizes": "512x512",
+        "type": "image/jpeg"
+      }
+    ],
+    "start_url": "https://app.yebekhe.link/ShiftSummate/",
+    "display": "fullscreen",
+    "theme_color": "#333",
+    "background_color": "#fff"
+  }
+  
