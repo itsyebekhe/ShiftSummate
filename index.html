@@ -333,8 +333,15 @@
 
     function exportTableData() {
         const tableData = JSON.stringify(getTableData(), null, 2);
-        const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(tableData);
-        window.open(dataUri, '_blank');
+        const blob = new Blob([tableData], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'shift_data.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 
     function importTableData() {
