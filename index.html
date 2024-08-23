@@ -20,8 +20,10 @@
 </script>
 <style>
 .table-container {
-    max-height: 400px; /* Set a maximum height for the table container */
-    overflow-y: auto; /* Enable vertical scrolling */
+    width: 100%; /* Lock the width to 100% of the parent container */
+    max-height: none; /* Remove the maximum height */
+    height: auto; /* Allow height to adjust based on content */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
     border-radius: 10px; /* Add rounded corners */
     background-color: #f9f9f9; /* Change background color */
     padding: 10px; /* Add some padding for better appearance */
@@ -293,6 +295,12 @@
           <a href="#" class="list-group-item list-group-item-action" onclick="resetTable()">
             <i class="fas fa-undo me-2"></i>بازنشانی جدول
           </a>
+          <a href="#" class="list-group-item list-group-item-action" onclick="exportTableData()">
+            <i class="fas fa-file-export me-2"></i>خروجی اکسل
+          </a>
+          <a href="#" class="list-group-item list-group-item-action" onclick="importTableData()">
+            <i class="fas fa-file-import me-2"></i>ورودی اکسل
+          </a>
         </div>
       </div>
       <div class="modal-footer">
@@ -322,6 +330,79 @@
             document.getElementById('themeIcon').classList.remove('fa-moon');
         }
     });
+
+    function exportTableData() {
+        const tableData = JSON.stringify(getTableData());
+        const blob = new Blob([tableData], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'shift_data.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function importTableData() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/json';
+        input.onchange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const content = e.target.result;
+                    const data = JSON.parse(content);
+                    populateTable(data);
+                };
+                reader.readAsText(file);
+            }
+        };
+        input.click();
+    }
+
+    function getTableData() {
+        const rows = document.querySelectorAll('#shiftTable tbody tr');
+        const data = [];
+        rows.forEach(row => {
+            const cols = row.querySelectorAll('td');
+            data.push({
+                workplace: cols[0].textContent,
+                date: cols[1].textContent,
+                startTime: cols[2].textContent,
+                endTime: cols[3].textContent,
+                dayRate: cols[4].textContent,
+                nightRate: cols[5].textContent,
+                shiftIncome: cols[6].textContent,
+                totalIncome: cols[7].textContent
+            });
+        });
+        return data;
+    }
+
+    function populateTable(data) {
+        const tbody = document.querySelector('#shiftTable tbody');
+        tbody.innerHTML = '';
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.workplace}</td>
+                <td>${item.date}</td>
+                <td>${item.startTime}</td>
+                <td>${item.endTime}</td>
+                <td>${item.dayRate}</td>
+                <td>${item.nightRate}</td>
+                <td>${item.shiftIncome}</td>
+                <td>${item.totalIncome}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
 </script>
 </body>
 </html>
