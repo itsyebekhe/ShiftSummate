@@ -332,16 +332,14 @@
     });
 
     function exportTableData() {
-        const tableData = JSON.stringify(getTableData());
-        const blob = new Blob([tableData], {type: "application/json"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'shift_data.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        const tableData = JSON.stringify(getTableData(), null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(tableData);
+        const link = document.createElement('a');
+        link.href = dataUri;
+        link.download = 'shift_data.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 
     function importTableData() {
@@ -403,6 +401,7 @@
             tbody.appendChild(row);
         });
     }
+
 </script>
 </body>
 </html>
