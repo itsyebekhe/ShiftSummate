@@ -182,10 +182,25 @@
 </style>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4a90e2;">
   <div class="container-fluid">
-    <button type="button" class="btn btn-success mb-3" onclick="saveTableToLocalStorage()"><i class="fas fa-save"></i></button>
-    <button id="themeToggle" class="btn btn-outline-light"><i id="themeIcon" class="fas fa-moon"></i></button>
+    <a class="navbar-brand" href="#">ShiftSummate</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button type="button" class="btn btn-success me-2" onclick="saveTableToLocalStorage()"><i class="fas fa-save"></i></button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-cog"></i></button>
+        </li>
+        <li class="nav-item">
+          <button id="themeToggle" class="btn btn-outline-light"><i id="themeIcon" class="fas fa-moon"></i></button>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 <div class="container my-5">
@@ -213,15 +228,9 @@
     </tbody>
   </table>
   </div>
-
-  <div class="d-flex gap-2">
-    <button type="button" class="btn btn-warning mb-3" onclick="updateWithJalaaliDates()"><i class="fas fa-calendar-alt"></i></button>
-    <button type="button" class="btn btn-info mb-3" onclick="copyTableToClipboard()"><i class="fas fa-copy"></i></button>
-    <button type="button" class="btn btn-danger mb-3" onclick="resetTable()"><i class="fas fa-undo"></i></button>
-  </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal for Shift Details -->
 <div class="modal fade" id="shiftModal" tabindex="-1" aria-labelledby="shiftModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -260,6 +269,34 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
         <button type="button" class="btn btn-primary" onclick="addShiftDetails()">افزودن</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Settings -->
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="settingsModalLabel">تنظیمات</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action" onclick="updateWithJalaaliDates()">
+            <i class="fas fa-calendar-alt me-2"></i>تبدیل تاریخ به شمسی
+          </a>
+          <a href="#" class="list-group-item list-group-item-action" onclick="copyTableToClipboard()">
+            <i class="fas fa-copy me-2"></i>کپی شیفت ها
+          </a>
+          <a href="#" class="list-group-item list-group-item-action" onclick="resetTable()">
+            <i class="fas fa-undo me-2"></i>بازنشانی جدول
+          </a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
       </div>
     </div>
   </div>
