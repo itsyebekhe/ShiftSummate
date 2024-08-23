@@ -121,6 +121,19 @@
     color: #ffffff;
 }
 
+.dark-mode .navbar {
+    background-color: #1e1e1e !important;
+}
+
+.dark-mode .modal-content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.dark-mode .modal-header, .dark-mode .modal-footer {
+    border-color: #333333;
+}
+
 .dark-mode #shiftForm .form-control {
     background-color: #1e1e1e;
     color: #ffffff;
@@ -171,40 +184,15 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">ShiftSummate</span>
+    <button type="button" class="btn btn-success mb-3" onclick="saveTableToLocalStorage()"><i class="fas fa-save"></i></button>
     <button id="themeToggle" class="btn btn-outline-light"><i id="themeIcon" class="fas fa-moon"></i></button>
   </div>
 </nav>
 <div class="container my-5">
-  <form id="shiftForm">
-    <div class="rtl-form-group">
-      <label for="workplace" class="form-label"> :داروخانه </label>
-      <input type="text" class="form-control" id="workplace" name="workplace" required>
-    </div>
-    <div class="rtl-form-group">
-      <label for="date" class="form-label"> :تاریخ </label>
-      <input type="date" class="form-control" id="date" name="date" required>
-    </div>
-    <div class="rtl-form-group">
-      <label for="startTime" class="form-label"> :شروع </label>
-      <input type="time" class="form-control" id="startTime" name="startTime" required>
-    </div>
-    <div class="rtl-form-group">
-      <label for="endTime" class="form-label"> :پایان </label>
-      <input type="time" class="form-control" id="endTime" name="endTime" required>
-    </div>
-    <div class="rtl-form-group">
-      <label for="dayRate" class="form-label"> :نرخ روز </label>
-      <input type="number" class="form-control" id="dayRate" name="dayRate" step="0.01" required>
-    </div>
-    <div class="rtl-form-group">
-      <label for="nightRate" class="form-label"> :نرخ شب </label>
-      <input type="number" class="form-control" id="nightRate" name="nightRate" step="0.01" required>
-    </div>
-    <button type="button" class="btn btn-primary mb-3" onclick="addShiftDetails()">افزودن</button>
-    <button type="button" id="submitEdit" class="btn btn-success mb-3" style="display: none;" onclick="updateShiftDetails(event)">اعمال تغییرات</button>
-    <button type="button" id="cancelEdit" class="btn btn-danger mb-3" style="display: none;" onclick="cancelTheEdit()">لغو</button>
-  </form>
+  <!-- Button to trigger the modal -->
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#shiftModal"><i class="fas fa-plus"></i></button>
+  </div>
   
   <div class="table-container">
   <table id="shiftTable" class="table table-striped">
@@ -226,16 +214,57 @@
   </table>
   </div>
 
- <div class="d-grid gap-2">
-    <button type="button" class="btn btn-success mb-3" onclick="saveTableToLocalStorage()">ذخیره کردن جدول</button>
-  </div>
-    
-  <div class="d-grid gap-2">
-    <button type="button" class="btn btn-warning mb-3" onclick="updateWithJalaaliDates()">تبدیل تاریخ به شمسی</button>
-    <button type="button" class="btn btn-info mb-3" onclick="copyTableToClipboard()">کپی شیفت ها</button>
-    <button type="button" class="btn btn-danger mb-3" onclick="resetTable()">بازنشانی جدول</button>
+  <div class="d-flex gap-2">
+    <button type="button" class="btn btn-warning mb-3" onclick="updateWithJalaaliDates()"><i class="fas fa-calendar-alt"></i></button>
+    <button type="button" class="btn btn-info mb-3" onclick="copyTableToClipboard()"><i class="fas fa-copy"></i></button>
+    <button type="button" class="btn btn-danger mb-3" onclick="resetTable()"><i class="fas fa-undo"></i></button>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="shiftModal" tabindex="-1" aria-labelledby="shiftModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="shiftModalLabel">افزودن شیفت</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="shiftForm">
+          <div class="rtl-form-group">
+            <label for="workplace" class="form-label"> :داروخانه </label>
+            <input type="text" class="form-control" id="workplace" name="workplace" required>
+          </div>
+          <div class="rtl-form-group">
+            <label for="date" class="form-label"> :تاریخ </label>
+            <input type="date" class="form-control" id="date" name="date" required>
+          </div>
+          <div class="rtl-form-group">
+            <label for="startTime" class="form-label"> :شروع </label>
+            <input type="time" class="form-control" id="startTime" name="startTime" required>
+          </div>
+          <div class="rtl-form-group">
+            <label for="endTime" class="form-label"> :پایان </label>
+            <input type="time" class="form-control" id="endTime" name="endTime" required>
+          </div>
+          <div class="rtl-form-group">
+            <label for="dayRate" class="form-label"> :نرخ روز </label>
+            <input type="number" class="form-control" id="dayRate" name="dayRate" step="0.01" required>
+          </div>
+          <div class="rtl-form-group">
+            <label for="nightRate" class="form-label"> :نرخ شب </label>
+            <input type="number" class="form-control" id="nightRate" name="nightRate" step="0.01" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+        <button type="button" class="btn btn-primary" onclick="addShiftDetails()">افزودن</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Include Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
