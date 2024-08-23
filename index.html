@@ -170,30 +170,30 @@
 <div class="container my-5">
   <form id="shiftForm">
     <div class="rtl-form-group">
-      <label for="workplace" class="form-label"> : داروخانه</label>
+      <label for="workplace" class="form-label"> :داروخانه </label>
       <input type="text" class="form-control" id="workplace" name="workplace" required>
     </div>
     <div class="rtl-form-group">
-      <label for="date" class="form-label"> : تاریخ</label>
+      <label for="date" class="form-label"> :تاریخ </label>
       <input type="date" class="form-control" id="date" name="date" required>
     </div>
     <div class="rtl-form-group">
-      <label for="startTime" class="form-label"> : شروع</label>
+      <label for="startTime" class="form-label"> :شروع </label>
       <input type="time" class="form-control" id="startTime" name="startTime" required>
     </div>
     <div class="rtl-form-group">
-      <label for="endTime" class="form-label"> : پایان</label>
+      <label for="endTime" class="form-label"> :پایان </label>
       <input type="time" class="form-control" id="endTime" name="endTime" required>
     </div>
     <div class="rtl-form-group">
-      <label for="dayRate" class="form-label"> : نرخ روز</label>
+      <label for="dayRate" class="form-label"> :نرخ روز </label>
       <input type="number" class="form-control" id="dayRate" name="dayRate" step="0.01" required>
     </div>
     <div class="rtl-form-group">
-      <label for="nightRate" class="form-label"> : نرخ شب</label>
+      <label for="nightRate" class="form-label"> :نرخ شب </label>
       <input type="number" class="form-control" id="nightRate" name="nightRate" step="0.01" required>
     </div>
-    <button type="button" class="btn btn-primary mb-3" onclick="addShiftDetails()">افزودن شیفت</button>
+    <button type="button" class="btn btn-primary mb-3" onclick="addShiftDetails()">افزودن</button>
     <button type="button" id="submitEdit" class="btn btn-success mb-3" style="display: none;" onclick="updateShiftDetails(event)">اعمال تغییرات</button>
     <button type="button" id="cancelEdit" class="btn btn-danger mb-3" style="display: none;" onclick="cancelTheEdit()">لغو</button>
   </form>
@@ -204,11 +204,11 @@
       <tr>
         <th>داروخانه</th>
         <th>تاریخ</th>
-        <th>ساعت شروع</th>
-        <th>ساعت پایان</th>
+        <th>شروع</th>
+        <th>پایان</th>
         <th>نرخ روز</th>
         <th>نرخ شب</th>
-        <th>درآمد</th>
+        <th>درآمد شیفت</th>
         <th>درآمد کل</th>
         <th>گزینه ها</th>
       </tr>
@@ -219,7 +219,7 @@
   </div>
 
  <div class="d-grid gap-2">
-    <button type="button" class="btn btn-success" onclick="saveTableToLocalStorage()">ذخیره تغییرات</button>
+    <button type="button" class="btn btn-success" onclick="saveTableToLocalStorage()">ذخیره کردن جدول</button>
   </div>
     
   <div class="d-grid gap-2">
